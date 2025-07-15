@@ -1,0 +1,60 @@
+{
+    "name": "codeofsolomon/laravel-saby-api",
+    "type": "library",
+    "description": "Unofficial Laravel SDK for the Saby API",
+    "keywords": [
+        "laravel",
+        "saby",
+        "api",
+        "client",
+        "sbis"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SabyApi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SabyApi\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Suleyman G",
+            "email": "jjons8622@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.2",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.9",
+        "psr/http-client": "^1.0",
+        "psr/http-message": "^2.0",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "webmozart/assert": "^1.11",
+        "nyholm/psr7": "^1.8"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^10",
+        "laravel/pint": "^1.0",
+        "phpstan/phpstan": "^1.12",
+        "phpstan/phpstan-strict-rules": "^1.5",
+        "friendsofphp/php-cs-fixer": "^3.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SabyApi\\Providers\\SabyApiServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "pint":      "vendor/bin/pint",
+        "pint:test": "vendor/bin/pint --test -v",
+        "test": "vendor/bin/phpunit"
+    }
+}
