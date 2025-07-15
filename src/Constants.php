@@ -10,6 +10,8 @@ class Constants
 
     public const NOMECLATURE_PRODUCT_LIST = 'nomenclature/list';
 
+    public const NOMECLATURE_BOUGHT_WITH = 'nomenclature/';
+
     public const NOMECLATURE_STOP_LIST = 'nomenclature/stop-list';
 
     public const CREATE_ORDER = 'order/create';

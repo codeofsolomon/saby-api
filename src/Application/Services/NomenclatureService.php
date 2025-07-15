@@ -40,6 +40,17 @@ final class NomenclatureService extends BaseService
 
     }
 
+    public function getBoughtWith(StopListRequest $filter, string $IdNom): ExtraMethodResponse
+    {
+        $response = $this->authorizedRequest(
+            'GET',
+            Constants::NOMECLATURE_BOUGHT_WITH.$IdNom,
+            $filter->toArray(),
+        );
+
+        return ExtraMethodResponse::fromArray($response);
+    }
+
     public function getStopList(StopListRequest $filter): ExtraMethodResponse
     {
 

@@ -6,6 +6,7 @@ namespace SabyApi\Application\Services;
 
 use SabyApi\Constants;
 use SabyApi\Domain\Dto\Requests\Order\CreateOrderRequest;
+use SabyApi\Domain\Dto\Requests\Order\CreatePaymentRequest;
 use SabyApi\Domain\Dto\Responses\Order\CreateOrderResponse;
 
 final class OrderService extends BaseService
@@ -60,5 +61,16 @@ final class OrderService extends BaseService
         );
 
         return CreateOrderResponse::fromArray($response);
+    }
+
+    public function createPaymentLink(CreatePaymentRequest $request, string $externalID): string
+    {
+        $response = $this->authorizedRequest(
+            'GET',
+            self::urlConstructor(Constants::GET_PAYMENT_LINK, $externalID),
+            $request->toArray(),
+        );
+
+        return $response['link'];
     }
 }
