@@ -29,8 +29,8 @@ final class SalesPointsRequest extends BaseRequest
         public ?int $page = null,
         public ?int $pageSize = null,
     ) {
-        Assert::greaterThanEq($pointId, 1, 'pointId должен быть ≥ 1.');
-        Assert::notEmpty($product, 'product не может быть пустым.');
+        
+        
         if ($page !== null) {
             Assert::greaterThanEq($page, 1, 'page должен быть ≥ 1.');
         }
