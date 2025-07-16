@@ -8,7 +8,7 @@ class Constants
 
     public const NOMECLATURE_PRICE_LIST = 'nomenclature/price-list';
 
-    public const NOMECLATURE_PRODUCT_LIST = 'nomenclature/list';
+    public const NOMECLATURE_PRODUCT_LIST = 'v2/nomenclature/list';
 
     public const NOMECLATURE_BOUGHT_WITH = 'nomenclature/';
 
