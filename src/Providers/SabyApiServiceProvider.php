@@ -12,6 +12,7 @@ use Psr\Http\Message\RequestFactoryInterface;
 use SabyApi\Application\Contracts\Auth\AuthenticatorInterface;
 use SabyApi\Application\Contracts\Cache\TokenCacheInterface;
 use SabyApi\Application\Contracts\Http\ApiClientInterface;
+use SabyApi\Application\Contracts\Http\AuthApiClientInterface;
 use SabyApi\Infrastructure\Auth\TokenAuthenticator;
 use SabyApi\Infrastructure\Cache\LaravelTokenCache;
 use SabyApi\Infrastructure\Http\GuzzleApiClient;
@@ -50,6 +51,14 @@ class SabyApiServiceProvider extends BaseServiceProvider
             );
         });
 
+        $this->app->singleton(AuthApiClientInterface::class, function () use ($config) {
+            return GuzzleApiClient::build(
+                baseUri: $config->get('saby-api.auth_url'),
+                timeout: (float) $config->get('saby-api.timeout'),
+                logger: $this->app->make(\Psr\Log\LoggerInterface::class)
+            );
+        });
+
         // 2) token cache
         $this->app->bind(TokenCacheInterface::class, function () use ($config) {
             /** @var CacheManager $cache */
@@ -65,7 +74,7 @@ class SabyApiServiceProvider extends BaseServiceProvider
         // 3) authenticator
         $this->app->singleton(AuthenticatorInterface::class, function () use ($config) {
             return new TokenAuthenticator(
-                api          : $this->app->make(ApiClientInterface::class),
+                api          : $this->app->make(AuthApiClientInterface::class),
                 cache        : $this->app->make(TokenCacheInterface::class),
                 requestFactory: $this->app->make(RequestFactoryInterface::class),
                 appClientId: $config->get('saby-api.app_client_id'),

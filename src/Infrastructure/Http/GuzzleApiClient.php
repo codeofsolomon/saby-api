@@ -41,14 +41,14 @@ class GuzzleApiClient implements ApiClientInterface
 
     public function send(RequestInterface $request): ResponseInterface
     {
-        $this->logger->debug('[iiko] REQUEST', [
+        $this->logger->debug('[saby] REQUEST', [
             'method' => $request->getMethod(),
             'uri' => (string) $request->getUri(),
         ]);
 
         $response = $this->guzzle->send($request);
 
-        $this->logger->debug('[iiko] RESPONSE', [
+        $this->logger->debug('[saby] RESPONSE', [
             'code' => $response->getStatusCode(),
         ]);
 

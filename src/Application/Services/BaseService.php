@@ -43,4 +43,10 @@ abstract class BaseService
 
         return json_decode((string) $response->getBody(), true);
     }
+
+    public static function urlConstructor(string $uri, string $externalId): string
+    {
+        // можно и strtr, и str_replace — по вкусу
+        return str_replace('{externalId}', $externalId, $uri);
+    }
 }

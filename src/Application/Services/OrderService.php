@@ -11,12 +11,6 @@ use SabyApi\Domain\Dto\Responses\Order\CreateOrderResponse;
 
 final class OrderService extends BaseService
 {
-    public static function urlConstructor(string $uri, string $externalId): string
-    {
-        // можно и strtr, и str_replace — по вкусу
-        return str_replace('{externalId}', $externalId, $uri);
-    }
-
     public function createOrder(CreateOrderRequest $request): CreateOrderResponse
     {
 
@@ -63,11 +57,11 @@ final class OrderService extends BaseService
         return CreateOrderResponse::fromArray($response);
     }
 
-    public function createPaymentLink(CreatePaymentRequest $request, string $externalID): string
+    public function createPaymentLink(CreatePaymentRequest $request): string
     {
         $response = $this->authorizedRequest(
             'GET',
-            self::urlConstructor(Constants::GET_PAYMENT_LINK, $externalID),
+            self::urlConstructor(Constants::GET_PAYMENT_LINK, $request->externalId),
             $request->toArray(),
         );
 

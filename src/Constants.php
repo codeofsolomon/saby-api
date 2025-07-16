@@ -23,4 +23,14 @@ class Constants
     public const GET_ORDER_STATUS = 'order/{externalId}/state';
 
     public const GET_PAYMENT_LINK = 'order/{externalId}/payment-link';
+
+    public const GET_DELIVERY_COST = 'delivery/cost';
+
+    public const SUGGESTED_ADDRESS = 'delivery/suggested-address';
+
+    public const GET_BONUS_BALANCE = '/customer/{externalId}/bonus-balance';
+
+    public const GET_BONUS_BALANCE_WRITE_OFFS = 'order/{externalId}/bonus-read';
+
+    public const WRITE_OFF_CREDIT_BONUSES = 'order/{externalId}/bonus-write-off';
 }
