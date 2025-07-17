@@ -29,8 +29,7 @@ final class SalesPointsRequest extends BaseRequest
         public ?int $page = null,
         public ?int $pageSize = null,
     ) {
-        
-        
+
         if ($page !== null) {
             Assert::greaterThanEq($page, 1, 'page должен быть ≥ 1.');
         }

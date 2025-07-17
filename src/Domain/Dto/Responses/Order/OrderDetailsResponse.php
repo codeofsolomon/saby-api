@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace SabyApi\Domain\Dto\Responses\Order;
 
-final readonly class CreateOrderResponse
+/**
+ * Детальный ответ с информацией о заказе
+ */
+final readonly class OrderDetailsResponse
 {
     /** @param OrderNomenclature[] $nomenclatures */
     public function __construct(
-        public int $resultCode,
-        public ?string $paymentRef,
-        public ?string $orderNumber,
-        public ?string $saleKey,
-        public ?string $message,
         public ?string $id,
         public ?string $key,
-        public ?string $number,
-        public int $pointId,
+        public ?string $saleKey,
+        public string $number,
+        public ?int $pointId,
         public ?string $comment,
         public ?CustomerResponse $customer,
         public ?\DateTimeImmutable $datetime,
@@ -32,13 +31,9 @@ final readonly class CreateOrderResponse
 
     /**
      * @param array{
-     *   resultCode: int,
-     *   paymentRef: string|null,
-     *   orderNumber: string,
-     *   saleKey: string,
-     *   message: string|null,
      *   id: string,
      *   key: string,
+     *   saleKey: string,
      *   number: string,
      *   pointId: int,
      *   comment: string,
@@ -56,37 +51,29 @@ final readonly class CreateOrderResponse
      */
     public static function fromArray(array $data): self
     {
-        // Nomenclatures
-        $nomenclatures = [];
-        foreach ($data['nomenclatures'] ?? [] as $item) {
-            $nomenclatures[] = OrderNomenclature::fromArray($item);
+        // parse nomenclatures
+        $items = [];
+        foreach ($data['nomenclatures'] ?? [] as $row) {
+            $items[] = OrderNomenclature::fromArray($row);
         }
 
-        // PromoCode and AdditionalFields
-        $promoCode = $data['promoCode'] ?? [];
-        $additionalFields = $data['additionalFields'] ?? [];
-
         return new self(
-            resultCode: (int) $data['resultCode'],
-            paymentRef: $data['paymentRef'] ?? null,
-            orderNumber: (string) $data['orderNumber'],
-            saleKey: (string) $data['saleKey'],
-            message: $data['message'] ?? null,
             id: (string) $data['id'],
             key: (string) $data['key'],
+            saleKey: (string) $data['saleKey'],
             number: (string) $data['number'],
             pointId: (int) $data['pointId'],
             comment: (string) $data['comment'],
             customer: CustomerResponse::fromArray($data['customer'] ?? []),
             datetime: new \DateTimeImmutable($data['datetime']),
-            nomenclatures: $nomenclatures,
+            nomenclatures: $items,
             delivery: DeliveryResponse::fromArray($data['delivery'] ?? []),
             paymentType: (int) $data['paymentType'],
-            totalPrice: (float) ($data['totalPrice'] ?? 0.0),
-            totalSum: (float) ($data['totalSum'] ?? 0.0),
+            totalPrice: (float) $data['totalPrice'],
+            totalSum: (float) $data['totalSum'],
             totalDiscount: isset($data['totalDiscount']) ? (float) $data['totalDiscount'] : null,
-            promoCode: $promoCode,
-            additionalFields: $additionalFields,
+            promoCode: $data['promoCode'] ?? [],
+            additionalFields: $data['additionalFields'] ?? [],
         );
     }
 }

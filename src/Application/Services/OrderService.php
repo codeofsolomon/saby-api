@@ -8,6 +8,8 @@ use SabyApi\Constants;
 use SabyApi\Domain\Dto\Requests\Order\CreateOrderRequest;
 use SabyApi\Domain\Dto\Requests\Order\CreatePaymentRequest;
 use SabyApi\Domain\Dto\Responses\Order\CreateOrderResponse;
+use SabyApi\Domain\Dto\Responses\Order\OrderStatusResponse;
+use SabyApi\Domain\Dto\Responses\Order\OrderDetailsResponse;
 
 final class OrderService extends BaseService
 {
@@ -24,7 +26,7 @@ final class OrderService extends BaseService
 
     }
 
-    public function cancelOrder(string $externalID): CreateOrderResponse
+    public function cancelOrder(string $externalID): bool
     {
         $response = $this->authorizedRequest(
             'PUT',
@@ -32,10 +34,10 @@ final class OrderService extends BaseService
             [],
         );
 
-        return CreateOrderResponse::fromArray($response);
+        return $response['success'];
     }
 
-    public function getOrderInfo(string $externalID): CreateOrderResponse
+    public function getOrderInfo(string $externalID): OrderDetailsResponse
     {
         $response = $this->authorizedRequest(
             'GET',
@@ -43,10 +45,10 @@ final class OrderService extends BaseService
             [],
         );
 
-        return CreateOrderResponse::fromArray($response);
+        return OrderDetailsResponse::fromArray($response);
     }
 
-    public function getOrderStatus(string $externalID): CreateOrderResponse
+    public function getOrderStatus(string $externalID): OrderStatusResponse
     {
         $response = $this->authorizedRequest(
             'GET',
@@ -54,7 +56,7 @@ final class OrderService extends BaseService
             [],
         );
 
-        return CreateOrderResponse::fromArray($response);
+        return OrderStatusResponse::fromArray($response);
     }
 
     public function createPaymentLink(CreatePaymentRequest $request): string
