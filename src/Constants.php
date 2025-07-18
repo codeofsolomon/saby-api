@@ -33,4 +33,6 @@ class Constants
     public const GET_BONUS_BALANCE_WRITE_OFFS = 'order/{externalId}/bonus-read';
 
     public const WRITE_OFF_CREDIT_BONUSES = 'order/{externalId}/bonus-write-off';
+
+    public const GET_CUSTOMER_ID = 'customer/find?phone=';
 }

@@ -8,8 +8,8 @@ use SabyApi\Constants;
 use SabyApi\Domain\Dto\Requests\Order\CreateOrderRequest;
 use SabyApi\Domain\Dto\Requests\Order\CreatePaymentRequest;
 use SabyApi\Domain\Dto\Responses\Order\CreateOrderResponse;
-use SabyApi\Domain\Dto\Responses\Order\OrderStatusResponse;
 use SabyApi\Domain\Dto\Responses\Order\OrderDetailsResponse;
+use SabyApi\Domain\Dto\Responses\Order\OrderStatusResponse;
 
 final class OrderService extends BaseService
 {
