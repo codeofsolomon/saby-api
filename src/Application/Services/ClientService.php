@@ -8,7 +8,7 @@ use SabyApi\Constants;
 
 final class ClientService extends BaseService
 {
-    public function getBalance(string $phone_number): ?string
+    public function getClientExternalID(string $phone_number): ?string
     {
 
         $response = $this->authorizedRequest(
