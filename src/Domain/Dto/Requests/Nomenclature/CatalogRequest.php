@@ -31,16 +31,18 @@ final class CatalogRequest extends BaseRequest
         public bool $withBarcode = true,
         public ?string $searchString = null,
         public ?int $page = null,
-        public ?int $pageSize = null,
+        public ?int $pagesize = null,
         public string $product = 'delivery',
+        public ?int $position = null,
+        public string $order = 'after'
     ) {
         Assert::greaterThanEq($pointId, 1, 'pointId должен быть ≥ 1.');
         if ($priceListId !== null) {
             Assert::greaterThanEq($priceListId, 1, 'priceListId должен быть ≥ 1.');
         }
 
-        if ($pageSize !== null) {
-            Assert::range($pageSize, 1, 500, 'pageSize должен быть в диапазоне 1–500.');
+        if ($pagesize !== null) {
+            Assert::range($pagesize, 1, 500, 'pageSize должен быть в диапазоне 1–500.');
         }
 
     }
